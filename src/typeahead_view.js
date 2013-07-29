@@ -199,10 +199,9 @@ var TypeaheadView = (function() {
       }
     },
 
-    _handleSelection: function(e) {
+    _handleSelection: function(e) {		
       var byClick = e.type === 'suggestionSelected',
-          suggestion = byClick ?
-            e.data : this.dropdownView.getSuggestionUnderCursor();
+          suggestion = this.dropdownView.getActiveSuggestion();
 
       if (suggestion) {
         this.inputView.setInputValue(suggestion.value);

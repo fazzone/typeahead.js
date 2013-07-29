@@ -184,12 +184,17 @@ var DropdownView = (function() {
       this._moveCursor(+1);
     },
 
-    getSuggestionUnderCursor: function() {
-      var $suggestion = this._getSuggestions()
-          .filter('.tt-is-under-cursor')
-          .first();
-
-      return $suggestion.length > 0 ? extractSuggestion($suggestion) : null;
+    getActiveSuggestion: function() {
+      //if there is a selection under the cursor, return it;
+      //otherwise return the first (if any) suggestion
+      var $suggestion  = this._getSuggestions(),
+          $underCursor = $suggestion.filter('.tt-is-under-cursor').first();
+      
+      if ($underCursor.length > 0)
+        return extractSuggestion($underCursor);
+      if ($suggestion.length > 0)
+        return extractSuggestion($suggestion.first());
+      return null;
     },
 
     getFirstSuggestion: function() {
